@@ -140,4 +140,5 @@ button {
   padding: 0.625rem clamp(0.75rem, 2vw, 1.0625rem);
   margin: 1rem 0;
   align-items: center;
+
 }
