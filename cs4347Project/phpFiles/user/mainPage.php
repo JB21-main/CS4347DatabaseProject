@@ -1,20 +1,22 @@
 <?php
   session_start();
   require_once 'db_connect.php';
-  $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-  $firstTime = false;
-  if($user_id) {
-      $check = $conn->prepare("SELECT COUNT(*) as total FROM prefers WHERE userID = ?");
-      $check->bind_param("i", $_SESSION['user_id']);
-      $check->execute();
-      $result = $check->get_result();
-      $data = $result->fetch_assoc();
-      
-      if($data['total'] == NULL){
-        $firstTime = true;
-      }
+  $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+  $firstTime = true;
+
+  if ($user_id) {
+
+    $check = $conn->prepare("SELECT * FROM prefers WHERE userID = ?");
+    $check->bind_param("i", $_SESSION['user_id']);
+    $check->execute();
+    $result = $check->get_result();
+
+    // if user already has preferences → NOT first time
+    if ($result->num_rows > 0) {
+        $firstTime = false;
   }
+}
 ?>
 
 
@@ -170,7 +172,7 @@
 </head>
 <body>
 
-  <!-- logo and sign in at the top -->
+  <!-- logo and welcome at the top -->
  <header class="top-bar">
     <div style="width:200px">
         <?php
@@ -193,10 +195,9 @@
 
   <!-- nav links -->
   <nav>
-    <a href="index.php">Home</a>
-    <a href="#">My Books</a>
-    
-    <div class="div-button">
+    <a href="mainPage.php">Home</a>
+    <a href="book_rec.php">My Books</a>
+      <div class="div-button">
       <?php if (isset($_SESSION['user_id'])): ?>
         <a href="user_account.php?id=<?php echo $user_id; ?>">
           <button type="button">Account</button>
@@ -211,12 +212,14 @@
   <main class="hero">
     <div class="hero-left">
       <h1 class="hero-title">Everything you <br>need to get back to<br>Literature</h1>
-      
-      <?php if (!$user_id): ?>
-        <a href="createAccount.php" class="btn-start">Get Started</a>
-      <?php elseif ($firstTime): ?>
-        <a href="preferences.php" class="btn-start">Get Started</a>
-      <?php endif; ?>
+    <?php if (!isset($_SESSION['user_id'])): ?>
+      <a href="signIn.php" class="btn-start">Get Started</a>
+
+    <?php elseif ($firstTime): ?>
+      <a href="preferences.php" class="btn-start">Get Started</a>
+    <?php else: ?>
+      <a href="book_rec.php" class="btn-start">Go to Recommendations</a>
+    <?php endif; ?>
     </div>
   </main>
 

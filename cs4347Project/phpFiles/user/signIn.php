@@ -27,6 +27,7 @@
           $_SESSION['user_id'] = $data['userID'];
           $_SESSION['email'] = $data['Email'];
           $_SESSION['fname'] = $data['FName'];
+          $_SESSION['lname'] = $data['LName'];
 
           header("Location: mainPage.php");
           exit();

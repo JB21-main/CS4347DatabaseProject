@@ -1,6 +1,7 @@
 <?php
     session_start();
 
+    $error = '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $fname = $_POST['fname'];
@@ -18,7 +19,7 @@
       $result = $check->get_result();
     
       if($result->num_rows > 0){
-        echo"Email already in use";
+        $error = "Email already in use";
       }
     
       else{
@@ -228,6 +229,11 @@
       <div class="form-wrap">
         <h1 class="form-title">Create Account</h1>
 
+        <!-- error message for invalid account creation details -->
+        <?php if (!empty($error)): ?>
+          <p style="color:red;text-align:center;"><?php echo $error; ?></p>
+        <?php endif; ?>
+        
         <form method  = "POST">
 
         <div class="field">

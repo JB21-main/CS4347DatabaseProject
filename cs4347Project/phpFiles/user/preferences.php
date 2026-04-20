@@ -1,46 +1,45 @@
 <?php
-    session_start();
+  session_start();
 
-    // Redirect to login if they aren't actually logged in
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: ../SignIn.php");
-        exit();
-    }
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $user_id = $_SESSION['user_id'];
-      $newGenres = [$_POST['genre1'], $_POST['genre2'], $_POST['genre3']];
+    // Get selected genres from form
+    $genre1 = $_POST['genre1'];
+    $genre2 = $_POST['genre2'];
+    $genre3 = $_POST['genre3'];
 
-      require_once 'db_connect.php';
+    require_once 'db_connect.php';
 
-      $deletePrefer = $conn->prepare("DELETE FROM prefers WHERE userID = ?");
-      $deletePrefer->bind_param("i", $user_id);
-      $deletePrefer->execute();
-      $deletePrefer->close();
+    $userID = $_SESSION['user_id'];
 
-    // insert new prefer data
-      foreach($newGenres as $gName) {
-        if(!empty($gName)) {
-          $getGid = $conn->prepare("SELECT genreID FROM genres WHERE genreName = ?");
-          $getGid->bind_param("s", $gName);
-          $getGid->execute();
-          $result = $getGid->get_result();
+    $delete = $conn->prepare("DELETE FROM prefers WHERE userID = ?");
+    $delete->bind_param("i", $userID);
+    $delete->execute();
 
-          if ($row = $result->fetch_assoc()) {
-              $gid = $row['genreID'];
-              $insert = $conn->prepare("INSERT INTO prefers (userID, genreID) VALUES (?, ?)");
-              $insert->bind_param("ii", $user_id, $gid);
-              $insert->execute();
-              $insert->close();
-          }
-          $getGid->close();
+    $genres = [$genre1, $genre2, $genre3];
+
+    foreach ($genres as $gName) {
+
+        // Get genreID from genre name
+        $getID = $conn->prepare("SELECT genreID FROM genres WHERE genreName = ?");
+        $getID->bind_param("s", $gName);
+        $getID->execute();
+        $result = $getID->get_result();
+
+        if ($row = $result->fetch_assoc()) {
+            $genreID = $row['genreID'];
+
+            // Insert into prefers table
+            $insert = $conn->prepare("INSERT INTO prefers (userID, genreID) VALUES (?, ?)");
+            $insert->bind_param("ii", $userID, $genreID);
+            $insert->execute();
         }
     }
-        $conn->close();
-        // Back to Main Page
-        header("Location: mainPage.php");
-        exit();
-    }
+
+  // Redirect after update
+  header("Location: mainPage.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -237,7 +236,7 @@
         <div class="dropdown-row">
           <label for="genre1">First Choice:</label>
           <div class="select-wrap">
-            <select id="genre1" name="genre1">
+            <select id="genre1" name="genre1" required>
               <option value="" disabled selected></option>
               <option>Journalism</option>
               <option>Film & Psychology</option>
@@ -252,7 +251,7 @@
         <div class="dropdown-row">
           <label for="genre2">Second Choice:</label>
           <div class="select-wrap">
-            <select id="genre2" name="genre2">
+            <select id="genre2" name="genre2" required>
               <option value="" disabled selected></option>
               <option>Journalism</option>
               <option>Film & Psychology</option>
@@ -267,7 +266,7 @@
         <div class="dropdown-row">
           <label for="genre3">Third Choice:</label>
           <div class="select-wrap">
-            <select id="genre3" name="genre3">
+            <select id="genre3" name="genre3" required>
               <option value="" disabled selected></option>
               <option>Journalism</option>
               <option>Film & Psychology</option>
@@ -280,7 +279,7 @@
         </div>
 
         <button type="submit" class="btn-next">Next</button>
-        <form>
+      </form>
       </div>
     </div>
 

@@ -1,7 +1,14 @@
 <?php
 include 'db_connect.php';
 
-$current_user_id = isset($_GET['id']) ? $_GET['id'] : 123456;
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: signIn.php");
+    exit();
+}
+
+$current_user_id = $_SESSION['user_id'];
 
 $rec_sql = "SELECT b.mmsID, b.Title, a.authorName, COUNT(bl.logID) as popularity
             FROM books b
@@ -196,7 +203,8 @@ $recommendations = $stmt->get_result();
     <!-- dropdown when you click the name -->
     <div class="user-menu" id="userMenu">
       <button class="user-trigger" onclick="toggleMenu()">
-        Jane Doe <span class="chevron">▼</span>
+        <?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?>
+        <span class="chevron">▼</span>
       </button>
       <div class="dropdown">
         <a href="#">My Profile</a>
@@ -210,7 +218,7 @@ $recommendations = $stmt->get_result();
 
   <!-- nav links -->
   <nav>
-    <a href="#">Home</a>
+    <a href="mainPage.php">Home</a>
     <a href="#" class="active">My Books</a>
     <a href="#">Account</a>
   </nav>
