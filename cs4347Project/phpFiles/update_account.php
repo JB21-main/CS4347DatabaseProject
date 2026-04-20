@@ -98,7 +98,7 @@ if (isset($_POST['delete_acc'])) {
             
             <?php 
             // Helper to build dropdowns
-            $all_genres = ["Journalism", "Film & Psychology", "Feminist Literature", "Media Theory", "Philosophy", "History"];
+            $all_genres = [" ", "Journalism", "Film & Psychology", "Feminist Literature", "Media Theory", "Philosophy", "History"];
             for ($i = 1; $i <= 3; $i++) {
                 $current_val = ${"genre" . $i}; // Dynamically gets $genre1, $genre2, $genre3
                 echo "<label>Choice $i</label>";
