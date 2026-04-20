@@ -1,14 +1,11 @@
 -- Creating Tables
 CREATE TABLE users (
-    userID INT NOT NULL,
+    userID INT AUTO_INCREMENT,
     FName VARCHAR(50) NOT NULL,
     LName VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
-    Role ENUM('user','admin') DEFAULT 'user',
-    Genre1 VARCHAR(100),
-    Genre2 VARCHAR(100),
-    Genre3 VARCHAR(100)
+    Role ENUM('user','admin') DEFAULT 'user'
 );
 
 CREATE TABLE author (
