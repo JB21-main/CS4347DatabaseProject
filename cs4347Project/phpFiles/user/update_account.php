@@ -1,14 +1,7 @@
 <?php
 include 'db_connect.php';
 
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: signIn.php");
-    exit();
-}
-
-$current_user_id = $_SESSION['user_id'];
+$current_user_id = isset($_GET['id']) ? $_GET['id'] : 123456;
 
 // Handle update
 if (isset($_POST['update'])) {
@@ -21,7 +14,6 @@ if (isset($_POST['update'])) {
     $updateUser = $conn->prepare("UPDATE users SET FName = ?, LName = ?, Email = ? WHERE userID = ?");
     $updateUser->bind_param("sssi", $fName, $lName, $email, $current_user_id);
     $updateUser->execute();
-    $_SESSION['fname'] = $fName;
 
     // delete old prefer data
     $deletePrefer = $conn->prepare("DELETE FROM prefers WHERE userID = ?");
@@ -87,7 +79,7 @@ if (isset($_POST['delete_acc'])) {
 <head>
     <meta charset="UTF-8">
     <title>Update Account</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body class="centered-body">
 
