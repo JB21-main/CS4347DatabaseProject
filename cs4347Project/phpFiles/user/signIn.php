@@ -216,7 +216,7 @@
   <div class="split">
 
     <!-- left side for the image -->
-    <div class="split-left">[ IMAGE ]</div>
+    <div class="split-left"><img src="../../images/art-literature-1600.jpg" style="width:100%;"></div>
 
     <!-- right side has sign in form -->
     <div class="split-right">

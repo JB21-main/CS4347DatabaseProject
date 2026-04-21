@@ -205,7 +205,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #f0ece6;
+      background: white;
       color: #aaa;
       font-family: 'EB Garamond', Georgia, serif;
       font-size: 1.3rem;
@@ -295,8 +295,8 @@
       </div>
     </div>
 
-    <!-- image goes here on the right -->
-    <div class="split-right">[ IMAGE ]</div>
+    <!-- image on the right -->
+    <div class="split-right"><img src="../../images/librairie-romantique-1600.jpg" style="width:100%;"></div>
 
   </div>
   <script>

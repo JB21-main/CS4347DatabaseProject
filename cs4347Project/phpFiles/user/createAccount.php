@@ -220,7 +220,7 @@
 
     <!-- left side for the image -->
     <div class="split-left">
-      <span class="img-placeholder">[ IMAGE ]</span>
+      <img src="../../images/reading-news-1600.jpg" style="width:100%;">
     </div>
 
     <!-- right side has the form fields -->
