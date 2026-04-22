@@ -1,5 +1,11 @@
 <?php
-include 'db_connect.php';
+require_once 'db_connect.php';
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: signIn.php");
+    exit();
+}
 
 // Get ID from URL
 $book_id = isset($_GET['id']) ? $_GET['id'] : '99101';
@@ -57,9 +63,6 @@ while($book_genre = $genre_result->fetch_assoc()) {
     <a href="logout.php" class="logout-link">Logout</a>
   </div>
 </header>
-
-
-
 
   <!-- nav links -->
   <nav>
