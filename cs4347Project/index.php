@@ -7,6 +7,6 @@
     else {
         header("Location: phpFiles/user/mainPage.php");
     }
-    
+
     exit();
 ?>
