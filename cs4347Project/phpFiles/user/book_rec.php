@@ -90,7 +90,6 @@ body {
     }
 
     nav a {
-      font-family: 'EB Garamond', Georgia, serif;
       font-size: 1.05rem;
       color: var(--dark);
       text-decoration: none;
