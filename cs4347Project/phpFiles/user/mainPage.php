@@ -26,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Lit Kit</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="/CS4347DatabaseProject/cs4347Project/css/main.css">
+  <link rel="stylesheet" href="/cs4347DATABASEPROJECT/cs4347Project/css/main.css">
 </head>
 <body>
 
@@ -35,7 +35,7 @@
     <div style="width:200px">
         <?php
           if (isset($_SESSION['fname'])) {
-            echo $_SESSION['fname'];
+            echo "<span class='welcome'>Welcome, " . $_SESSION['fname'] . "</span>";
           }
         ?>
     </div>
