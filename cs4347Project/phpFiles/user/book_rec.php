@@ -69,7 +69,7 @@ $recommendations = $stmt->get_result();
 
 <body>
 
-  <!-- logo and welcome at the top -->
+  <!-- logo and name at the top -->
  <header class="top-bar">
     <div style="width:200px">
         <?php

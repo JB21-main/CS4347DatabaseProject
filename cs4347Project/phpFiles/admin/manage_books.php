@@ -49,13 +49,11 @@ $books = $conn->query("SELECT b.mmsID, b.Title, a.authorName,
 </head>
 <body>
 
-  <!-- logo and welcome at the top -->
+  <!-- logo and name at the top -->
  <header class="top-bar">
     <div style="width:200px">
         <?php
-          if (isset($_SESSION['fname'])) {
-            echo "<span class='welcome'>Welcome, " . $_SESSION['fname'] . "</span>";
-          }
+          echo "<span class='welcome'>" . $_SESSION['fname'] ." " . $_SESSION['lname'] . "</span>";
         ?>
     </div>
 

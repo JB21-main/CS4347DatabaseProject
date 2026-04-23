@@ -14,39 +14,74 @@ $admin_role = $_SESSION['Role'] ?? 'Administrator';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--links for fonts and style sheet-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
-    <!---->
-    <title>Admin Account</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account | The Lit Kit</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=EB+Garamond&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/cs4347DATABASEPROJECT/cs4347Project/css/main.css">
+<link rel="stylesheet" href="/cs4347DATABASEPROJECT/cs4347Project/css/style.css">
 </head>
-<!--change hard coded values once db connected-->
+
 <body>
-    <div>
-        <!--div with heading and edit button TODO: move button to right-->
-        <div class="horiz-spaced-div">
-            <h1 >Account Details</h1>
-           <div>
-                <a href="update_admin.php" style="text-decoration: none;">
-                    <button class="justify-right">Edit Account</button>
-                </a>
-            </div>
+
+<!-- HEADER -->
+<header class="top-bar">
+    <div style="width:200px;"></div>
+
+    <span class="logo-text">The Lit Kit</span>
+
+    <div style="width:200px; text-align:right;">
+        <a href="/CS4347DATABASEPROJECT/cs4347Project/phpFiles/user/logout.php" class="sign-in">Logout</a>
+    </div>
+</header>
+
+<!-- NAV -->
+<nav>
+    <a href="adminMainPage.php">Home</a>
+    <a href="manage_books.php">Books Inventory</a>
+    <a href="admin_account.php">Account</a>
+</nav>
+
+
+
+<!-- MAIN CONTENT -->
+<main>
+
+    <div class="div-border">
+
+        <h1>Account Details</h1>
+
+        <h3>Name</h3>
+        <input type="text"
+            value="<?= htmlspecialchars(($_SESSION['fname']) . ' ' . ($_SESSION['lname'] )) ?>"
+            readonly>
+
+        <h3>Email</h3>
+        <input type="text"
+            value="<?= htmlspecialchars($_SESSION['email'])?>"
+            readonly>
+
+        <h3>Role</h3>
+        <input type="text"
+            value="<?= htmlspecialchars($_SESSION['Role'])?>"
+            readonly>
+
+        <h3>ID</h3>
+        <input type="text"
+            value="<?= htmlspecialchars($_SESSION['user_id'])?>"
+            readonly> 
+
+
+        <div class="div-button">
+            <a href="update_admin.php">
+                <button type="button">Edit Account</button>
+            </a>
         </div>
-    
-    <h3>Name</h3>
-    <input type="acct-text" value="<?php echo htmlspecialchars($admin_fname . ' ' . $admin_lname); ?>" readonly>  
-    <h3>Email</h3>
-    <input type="acct-text" value="<?php echo htmlspecialchars($admin_email); ?>" readonly> 
 
-    <h1 >Role Details</h1>
-    <p><strong>Role:</strong> <?php echo ucfirst($admin_role); ?></p>
-    <p><strong>ID:</strong> <?php echo htmlspecialchars($admin_id); ?></p>
+    </div>
+
+</main>
+
 </body>
-<footer>
-
-</footer>
 </html>

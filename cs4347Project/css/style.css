@@ -132,6 +132,10 @@ button {
   background-color: #c4000a;
 }
 
+.edit-button {
+  background-color: #adc400;
+}
+
 .center-title {
   text-align: center;
 }

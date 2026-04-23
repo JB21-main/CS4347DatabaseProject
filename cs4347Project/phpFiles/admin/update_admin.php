@@ -16,9 +16,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sssi", $new_fname, $new_lname, $new_email, $admin_id);
 
     if($stmt->execute()) {
-        $_SESSION['FName'] = $new_fname;
-        $_SESSION['LName'] = $new_lname;
-        $_SESSION['Email'] = $new_email;
+        $_SESSION['fName'] = $new_fname;
+        $_SESSION['lName'] = $new_lname;
+        $_SESSION['email'] = $new_email;
 
         header("Location: admin_account.php?msg=success");
         exit();
@@ -34,20 +34,40 @@ $stmt->bind_param("i", $admin_id);
 $stmt->execute();
 $admin_data = $stmt->get_result()->fetch_assoc();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--links for fonts and style sheet-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
-    <!---->
-    <title>Update Account</title>
+<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>The Lit Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/CS4347DatabaseProject/cs4347Project/css/style.css">
+    <link rel="stylesheet" href="/CS4347DatabaseProject/cs4347Project/css/main.css">
+
 </head>
-<body class="centered-body">
+
+<body>
+
+<!-- HEADER -->
+<header class="top-bar">
+    <div style="width:200px;"></div>
+
+    <span class="logo-text">The Lit Kit</span>
+
+    <div style="width:200px; text-align:right;">
+        <a href="logout.php" class="sign-in">Logout</a>
+    </div>
+</header>
+
+<!-- NAV -->
+<nav>
+    <a href="adminMainPage.php">Home</a>
+    <a href="manage_books.php">Books Inventory</a>
+    <a href="admin_account.php">Account</a>
+</nav>
+
+
     <!--div for editing account details-->
     <form action="update_admin.php" method = "POST" class="div-border">
         <h1>Edit Account Details</h1>
