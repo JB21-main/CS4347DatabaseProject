@@ -56,7 +56,7 @@ $admin_data = $stmt->get_result()->fetch_assoc();
     <span class="logo-text">The Lit Kit</span>
 
     <div style="width:200px; text-align:right;">
-        <a href="logout.php" class="sign-in">Logout</a>
+        <a href="/CS4347DatabaseProject/cs4347Project/phpFiles/user/logout.php" class="sign-in">Logout</a>
     </div>
 </header>
 
