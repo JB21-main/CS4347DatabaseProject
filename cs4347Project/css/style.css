@@ -200,3 +200,19 @@ button {
   margin-bottom: 12px;
   font-size: 0.9rem;
 }
+
+.table-container {
+  max-width: 1000px;
+}
+
+.search-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-row input {
+  flex: 1;
+  width: auto;        /* overrides 250px */
+  margin-bottom: 0;   /* remove spacing */
+}

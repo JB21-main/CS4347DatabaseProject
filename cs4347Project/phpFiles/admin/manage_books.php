@@ -36,46 +36,85 @@ $books = $conn->query("SELECT b.mmsID, b.Title, a.authorName,
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Manage Books</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>The Lit Kit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/CS4347DatabaseProject/cs4347Project/css/style.css">
+    <link rel="stylesheet" href="/CS4347DatabaseProject/cs4347Project/css/main.css">
+
+    <!---->
+    <script src="https://kit.fontawesome.com/c00cc4f5f4.js" crossorigin="anonymous"></script>
+    
 </head>
 <body>
-    <!--div with title and search bar TODO: move search bar to right-->
-    <div>
-        <h1>Manage Books:</h1>
+
+  <!-- logo and welcome at the top -->
+ <header class="top-bar">
+    <div style="width:200px">
+        <?php
+          if (isset($_SESSION['fname'])) {
+            echo "<span class='welcome'>Welcome, " . $_SESSION['fname'] . "</span>";
+          }
+        ?>
+    </div>
+
+    <span class="logo-text">The Lit Kit</span>
+
+    <div style="width:200px; text-align:right;">
+        <?php
+            if (isset($_SESSION['user_id'])) {
+                echo "<a href='/CS4347DatabaseProject/cs4347Project/phpFiles/user/logout.php' class='sign-in'>Logout</a>";
+            }
+        ?>
+    </div>
+</header>
+
+  <nav>
+    <a href="adminMainPage.php">Home</a>
+    <a href="manage_books.php">Books Inventory</a>
+    <a href="admin_account.php">Account</a>
+  </nav>
+
+  <div class="centered-body">
+    <div class="table-container">
+
+      <div class="search-row">
         <input type="text" id="book-search" placeholder="Search by title, id, or author..">
+        <button>Search</button>
+      </div>
+
+      <table class="book-table">
+        <thead>
+          <tr>
+            <th>MMSID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <?php while($row = $books->fetch_assoc()): ?>
+          <tr>
+            <td><?= $row['mmsID']; ?></td>
+            <td><?= htmlspecialchars($row['Title']); ?></td>
+            <td><?= htmlspecialchars($row['authorName']); ?></td>
+            <td><?= htmlspecialchars($row['genreList']); ?></td>
+            <td>
+              <a href="edit_book.php?id=<?= $row['mmsID']; ?>">Edit</a> |
+                <a href="?delete_id=<?= $row['mmsID']; ?>" onclick="return confirm('Are you sure?')">
+                <button class="delete-button" type="button">Delete</button>
+                </a>
+            </td>
+          </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
+
     </div>
-    <!--list of books- has placeholders for now-->
-    <div class="book-list-container">
-        <table class="book-table">
-            <thead>
-                <tr>
-                    <th>MMSID</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Genre</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while($row = $books->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo $row['mmsID']; ?></td>
-                    <td><?php echo htmlspecialchars($row['Title']); ?></td>
-                    <td><?php echo htmlspecialchars($row['authorName']); ?></td>
-                    <td><?php echo htmlspecialchars($row['genreList']); ?></td>
-                     <td>
-                        <a href="edit_book.php?id=<?php echo $row['mmsID']; ?>">Edit</a> | 
-                        <a href="?delete_id=<?php echo $row['mmsID']; ?>" 
-                           class="btn-delete" 
-                           onclick="return confirm('Are you sure?')">Delete</a>
-                     </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
-    
+  </div>
+
 </body>
 </html>

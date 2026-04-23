@@ -32,7 +32,7 @@
 
       if ($_SESSION['Role'] === 'admin') {
               // Go UP one level, then into admin *currently make manage_book as a placeholder*
-              header("Location: ../admin/admin_account.php");
+              header("Location: /CS4347DatabaseProject/cs4347Project/phpFiles/admin/adminMainPage.php");
           } else {
               header("Location: mainPage.php");
           }
