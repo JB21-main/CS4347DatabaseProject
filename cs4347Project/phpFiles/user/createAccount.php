@@ -29,7 +29,7 @@
         if($stmt->execute()) {
           $stmt->close();
           $conn->close();
-          //Verification Message
+          //Going to sign in page after account creation
           header("Location: SignIn.php");
           exit();
         }
