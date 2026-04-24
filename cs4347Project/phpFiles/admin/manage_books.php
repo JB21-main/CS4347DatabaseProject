@@ -101,7 +101,7 @@ $books = $conn->query("SELECT b.mmsID, b.Title, a.authorName,
             <td><?= htmlspecialchars($row['authorName']); ?></td>
             <td><?= htmlspecialchars($row['genreList']); ?></td>
             <td>
-              <a href="edit_book.php?id=<?= $row['mmsID']; ?>">Edit</a> |
+              <a href="edit-book.php?id=<?= $row['mmsID']; ?>">Edit</a> |
                 <a href="?delete_id=<?= $row['mmsID']; ?>" onclick="return confirm('Are you sure?')">
                 <button class="delete-button" type="button">Delete</button>
                 </a>

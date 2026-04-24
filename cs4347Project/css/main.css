@@ -183,3 +183,17 @@
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
+
+.genre-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.genre-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Lato";
+}
