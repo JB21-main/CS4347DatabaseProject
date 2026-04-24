@@ -1,3 +1,7 @@
+<Phuong - this part is for php notes>
+    <create a querry in php to fetch all authors>
+    <create a querry in php to fetch all genres>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +22,23 @@
         <label for="title">Title</label>
         <input type="text"   id="title">
 
-        <label for="author-id">Author Name</label>
-        <input type="text" id="author-id">
+        <label for="author_name">Author Name</label>
+        <input type="text" id="author_name" name="author_name" list="author-list" placeholder="Start typing author...">
+        <datalist id="author-list">
+            <---this is for php to fetch author name--->
+                <option value = "<?php echo htmlspecialchars($row['authorName']);?>">
+                </option>
+            <---end php--->
+        </datalist>
 
-        <label for="genre-id">Genre</label>
-        <input type="text" id="genre-id">
+        <label for="genre_name">Genre</label>
+        <input type="text" id="genre_name" name="genre_name" list="genre-list" placeholder="Start typing genre...">
+        <datalist id="genre-list">
+            <---this is for php to fetch author name--->
+                <option value = "<?php echo htmlspecialchars($row['genreName']);?>">
+                </option>
+            <---end php--->
+        </datalist>
 
         <label for="barcode">Barcode</label>
         <input type="text" id="barcode">
