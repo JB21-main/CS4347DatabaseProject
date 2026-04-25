@@ -8,11 +8,11 @@ if (isset($_GET['delete_id'])) {
     $conn->begin_transaction();
     try {
         $stmt1 = $conn->prepare("DELETE FROM book_genre WHERE mmsID = ?");
-        $stmt1->bind_param("i", $delete_id);
+        $stmt1->bind_param("s", $delete_id);
         $stmt1->execute();
 
         $stmt2 = $conn->prepare("DELETE FROM books WHERE mmsID = ?");
-        $stmt2->bind_param("i", $delete_id);
+        $stmt2->bind_param("s", $delete_id);
         $stmt2->execute();
         
         $conn->commit();
@@ -92,7 +92,7 @@ $books = $conn->query("SELECT b.mmsID, b.Title, a.authorName,
             <th>Add Copy</th>
             <th>Edit</th>
             <th>Delete</th>
-            <th>View</th>
+            <th>Copies</th>
           </tr>
         </thead>
 
@@ -115,7 +115,42 @@ $books = $conn->query("SELECT b.mmsID, b.Title, a.authorName,
                 </a>
             </td>
             <td>
-              <a><i class="fa-solid fa-chevron-down"></i></a>
+              <a onclick="toggleCopies('copies-<?= $row['mmsID'] ?>')" style="cursor:pointer;">
+                <i class="fa-solid fa-chevron-down"></i>
+              </a>
+            </td>
+          </tr>
+          <!-- copies for each row of books- hidden until toggleCopies -->
+          <tr id="copies-<?= $row['mmsID'] ?>" style="display:none;">
+            <td colspan="8">
+              <table class="book-table">
+                <thead>
+                  <tr>
+                    <th>Barcode</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $mmsID = $row['mmsID'];
+                    $copyStmt = $conn->prepare("SELECT Barcode, status FROM books_copy WHERE mmsID = ?");
+                    $copyStmt->bind_param("s", $mmsID);
+                    $copyStmt->execute();
+                    $copies = $copyStmt->get_result();
+
+                    if ($copies->num_rows === 0):
+                  ?>
+                    <tr><td colspan="2">No copies available.</td></tr>
+                  <?php else: ?>
+                    <?php while($copy = $copies->fetch_assoc()): ?>
+                      <tr>
+                        <td><?= htmlspecialchars($copy['Barcode']) ?></td>
+                        <td><?= htmlspecialchars($copy['status']) ?></td>
+                      </tr>
+                    <?php endwhile; ?>
+                  <?php endif; ?>
+                </tbody>
+              </table>
             </td>
           </tr>
           <?php endwhile; ?>
@@ -126,6 +161,12 @@ $books = $conn->query("SELECT b.mmsID, b.Title, a.authorName,
 
     </div>
   </div>
+  <script>
+function toggleCopies(id) {
+    const row = document.getElementById(id);
+    row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+}
+</script>
 
 </body>
 </html>

@@ -213,7 +213,8 @@
 
     <!-- left side for the image -->
     <div class="split-left">
-      <span class="img-placeholder"><img src="../../images/reading-news-1600.jpg" style="width:100%;"></span>
+      <!--<span class="img-placeholder"><img src="../../images/reading-news-1600.jpg" style="width:100%;"></span> -->
+      <span class="img-placeholder"><img src="../../images/art-literature-1600.jpg" style="width:80%; margin-left:100px;"></span>
     </div>
 
     <!-- right side has the form fields -->

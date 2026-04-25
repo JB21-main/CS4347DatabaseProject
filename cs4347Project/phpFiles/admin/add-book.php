@@ -1,7 +1,7 @@
 <?php 
 require_once '../user/db_connect.php';
 require_once 'admin_check.php';  
-include 'adminNavBar.php';
+//include 'adminNavBar.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $title      = trim($_POST['title']);
     $authorID   = (int)$_POST['authorID'];
     $callNumber = trim($_POST['callNumber']);
-    $genres     = $_POST['genres'] ?? [];
+    $selectedGenres     = $_POST['genres'] ?? [];
 
     $conn->begin_transaction();
 
@@ -72,6 +72,7 @@ $genres = $conn->query("SELECT genreID, genreName FROM genres");
     <title>Add Book</title>
 </head>
 <body class="centered-body">
+    <?php include '../common/nav.php'; ?> 
 
     <form method="POST" class="div-border">
         <h1>Add Book</h1>
