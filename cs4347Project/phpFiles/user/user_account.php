@@ -103,7 +103,7 @@ $g3 = $user_genres[2] ?? "None Selected";
         <input type="text" value="<?php echo htmlspecialchars($g3); ?>" readonly>
 
         <div class="div-button">
-            <a href="update_account.php?id=<?php echo $current_user_id; ?>">
+            <a href="update_account.php">
                 <button type="button">Edit Account</button>
             </a>
         </div>
