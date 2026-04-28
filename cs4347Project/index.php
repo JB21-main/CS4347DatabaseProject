@@ -5,7 +5,7 @@
     header("Location: phpFiles/user/mainPage.php");
     }   
     else {
-        header("Location: phpFiles/user/mainPage.php");
+        header("Location: phpFiles/user/signin.php");
     }
 
     exit();
